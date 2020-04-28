@@ -4,8 +4,6 @@ import sys
 
 import nltk
 from nltk.corpus import wordnet as wn
-from nltk.corpus import words
-from nltk.corpus import brown
 
 synsets = list(wn.all_synsets())
 words = set()
