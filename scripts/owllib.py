@@ -1,4 +1,5 @@
 from collections import defaultdict
+import re
 from unidecode import unidecode
 
 SCRABBLE_VALUES = defaultdict(int, (
@@ -8,14 +9,17 @@ SCRABBLE_VALUES = defaultdict(int, (
   ('V', 4), ('W', 4), ('X', 8), ('Y', 4), ('Z', 10)
 ))
 
+NON_ALPHANUMERIC_RE = r'[A-Z0-9]'
+
 class Word:
 
   def __init__(self, token):
     self.token = token
     self.lemma = self.lemmatize()
+    self.scrabble = self.scrabble_score()
 
   def lemmatize(self):
-    return unidecode(self.token).translate(str.maketrans('', '', ' \'')).upper()
-
+    return re.sub(r'\W', '', unidecode(self.token)).upper()
+    
   def scrabble_score(self):
     return sum(SCRABBLE_VALUES[char] for char in self.lemma)
