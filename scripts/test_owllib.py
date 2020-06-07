@@ -11,9 +11,6 @@ TEST_WORD_COMPLEX_LEMMA = "TYPENULL"
 TEST_WORD_DIACRITICS = "Flabébé"
 TEST_WORD_DIACRITICS_LEMMA = "FLABEBE"
 
-TEST_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-TEST_ALPHABET_SCRABBLE_SCORE = 87
-
 
 @pytest.fixture
 def basic_word():
@@ -27,16 +24,20 @@ def complex_word():
 def word_with_diacritics():
   return Word(TEST_WORD_DIACRITICS)
 
-@pytest.fixture
-def alphabet():
-  return Word(TEST_ALPHABET)
 
+def test_word_hashing():
+  w1 = Word('Snorlax')
+  w2 = Word('Snorlax')
+  w3 = Word('Snor Lax')
+  assert {w1, w2, w3} == {w1, w3}
+  assert {w1, w3} - {w1} == {w3}
+  assert set() - {w1} <= {w1} - set()
 
 def test_lemmatize(basic_word, complex_word, word_with_diacritics):
   assert basic_word.lemmatize() == TEST_WORD_BASIC_LEMMA
   assert complex_word.lemmatize() == TEST_WORD_COMPLEX_LEMMA
   assert word_with_diacritics.lemmatize() == TEST_WORD_DIACRITICS_LEMMA
 
-def test_scrabble_score(basic_word, alphabet):
-  assert basic_word.scrabble_score() == TEST_WORD_BASIC_SCRABBLE_SCORE
-  assert alphabet.scrabble_score() == TEST_ALPHABET_SCRABBLE_SCORE
+def test_scrabble(basic_word):
+  assert basic_word.scrabble() == TEST_WORD_BASIC_SCRABBLE_SCORE
+  assert Word('ABCDEFGHIJKLMNOPQRSTUVWXYZ').scrabble() == 87
