@@ -1,4 +1,5 @@
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
+import re
 from unidecode import unidecode
 
 SCRABBLE_VALUES = defaultdict(int, (
@@ -8,14 +9,46 @@ SCRABBLE_VALUES = defaultdict(int, (
   ('V', 4), ('W', 4), ('X', 8), ('Y', 4), ('Z', 10)
 ))
 
-class Word:
 
-  def __init__(self, token):
+@total_ordering
+class Word:
+  def __init__(self, token, score=0):
     self.token = token
+    self.score = score
     self.lemma = self.lemmatize()
 
-  def lemmatize(self):
-    return unidecode(self.token).translate(str.maketrans('', '', ' \'')).upper()
+  def __hash__(self):
+    return hash((self.token, self.score))
 
-  def scrabble_score(self):
+  def __eq__(self, other):
+    return (self.token == other.token) and (self.score == other.score)
+
+  def __lt__(self, other):
+    return ((len(self.lemma) < len(other.lemma)) or
+            (self.lemma < other.lemma) or
+            (self.score < other.score) or
+            (self.token < other.token))
+
+  def lemmatize(self):
+    return re.sub(r'\W', '', unidecode(self.token)).upper()
+    
+  def scrabble(self):
     return sum(SCRABBLE_VALUES[char] for char in self.lemma)
+
+
+class WordList:
+  def __init__(self, wordlist=OrderedDict()):
+    self.wordlist = wordlist
+
+  def add(self, word):
+    if word.lemma in self.wordlist:
+      doppels = self.wordlist[word.lemma]
+      doppels.remove(word) # the new word overwrites an existing word with the same token
+      doppels.add(word)
+    else:
+      self.wordlist[word.lemma] = {word}
+
+  def merge(self, other):
+    for doppels in other.wordlist.values():
+      for doppel in doppels:
+        self.add(doppel)
