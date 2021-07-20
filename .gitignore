@@ -1,6 +1,1 @@
-.Python
-pip-selfcheck.json
-pyvenv.cfg
-bin/
-include/
-lib/
+.env
