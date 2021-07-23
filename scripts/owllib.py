@@ -15,7 +15,7 @@ class Word:
   def __init__(self, token, score=0):
     self.token = token
     self.score = score
-    self.lemma = self.lemmatize()
+    self.lemma = self.normalize()
 
   def __hash__(self):
     return hash((self.token, self.score))
@@ -29,7 +29,7 @@ class Word:
             (self.score < other.score) or
             (self.token < other.token))
 
-  def lemmatize(self):
+  def normalize(self):
     return re.sub(r'\W', '', unidecode(self.token)).upper()
     
   def scrabble(self):
