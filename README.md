@@ -66,4 +66,10 @@ A `WordList` is an ordered list of `Word` objects (surprise!), but also supports
 
 ### Data Sources
 
-* `common.txt` is Michael Wehar's [`5000-more-common.txt` word list](https://github.com/MichaelWehar/Public-Domain-Word-Lists), which has been released into the public domain.
+* `common.owl` is Michael Wehar's [`5000-more-common.txt` word list](https://github.com/MichaelWehar/Public-Domain-Word-Lists), which has been released into the public domain.
+
+* `broda.owl` is [Peter Broda's word list](https://peterbroda.me/crosswords/wordlist/), which he has generously provided to the community for free use.
+
+* `wordnet-scrabble.owl` is derived from [Princeton's WordNet](https://wordnet.princeton.edu/), a lexical database for English, which is available under the [WordNet 3.0 license](https://wordnet.princeton.edu/license-and-commercial-use) for unencumbered use.
+
+* `test-capitals.owl` and `test-default.owl` are toy word lists I created for testing purposes.
