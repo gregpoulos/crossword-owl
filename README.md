@@ -17,7 +17,7 @@ Open Word List for crossword constructors
     - `nltk.download()`
 
 3. To run the tests:
-    - `pytest .`
+    - `pytest src/test`
 
 
 ## Data Model
