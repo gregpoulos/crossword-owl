@@ -11,6 +11,9 @@ class Word:
     self.score = score
     self.lemma = self.lemmatize()
 
+  def __str__(self):
+    return f'Word: {{token: "{self.token}", score: "{self.score}", lemma: "{self.lemma}"}}'
+  
   def __hash__(self):
     return hash((self.token, self.score))
 
