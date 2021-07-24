@@ -1,4 +1,4 @@
-from owllib import Word
+from owllib.word import Word
 import pytest
 
 TEST_WORD_BASIC = "Snorlax"
