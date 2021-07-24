@@ -62,3 +62,8 @@ TBD: A word could have one or more sample clues.
 ### `WordList`s
 
 A `WordList` is an ordered list of `Word` objects (surprise!), but also supports the notion of a _doppel_ -- that is, two different words that normalize to the same lemma. So even though "résumé" and "resume" are represented as two distinct `Word` objects, they will share an entry in a `WordList` because they map to the same lemma, `"RESUME"`.
+
+
+### Data Sources
+
+* `common.txt` is Michael Wehar's [`5000-more-common.txt` word list](https://github.com/MichaelWehar/Public-Domain-Word-Lists), which has been released into the public domain.
