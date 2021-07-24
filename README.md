@@ -1,23 +1,23 @@
 # crossword-owl
 Open Word List for crossword constructors
 
-## Dev setup notes
+## Dev setup
 
-I'm assuming you're on a Mac.
-
-0. Clone the repo:
+1. Clone the repo:
    - `git clone https://github.com/gregpoulos/crossword-owl.git`
    - `cd crossword-owl`
 
-1. Set up your Python environment:
+2. Set up your Python environment:
    - `python3 -m venv .env --prompt owl-env`
    - `source .env/bin/activate`
    - `pip install -r requirements.txt`
 
-2. Open the Python terminal and install the NLTK data. (See [the NLTK install guide](https://www.nltk.org/data.html#interactive-installer) for more info.)
-    - `python3`
+2. [Optional] [Install the NLTK data.](https://www.nltk.org/data.html#interactive-installer) Open the Python terminal and run:
     - `import nltk`
     - `nltk.download()`
+
+3. To run the tests:
+    - `pytest .`
 
 
 ## Data Model

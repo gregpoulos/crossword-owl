@@ -1,4 +1,5 @@
 from collections import defaultdict, OrderedDict
+from functools import total_ordering
 import re
 from unidecode import unidecode
 
@@ -15,7 +16,7 @@ class Word:
   def __init__(self, token, score=0):
     self.token = token
     self.score = score
-    self.lemma = self.normalize()
+    self.lemma = self.lemmatize()
 
   def __hash__(self):
     return hash((self.token, self.score))
@@ -29,7 +30,7 @@ class Word:
             (self.score < other.score) or
             (self.token < other.token))
 
-  def normalize(self):
+  def lemmatize(self):
     return re.sub(r'\W', '', unidecode(self.token)).upper()
     
   def scrabble(self):
